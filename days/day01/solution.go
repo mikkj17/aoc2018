@@ -1,4 +1,4 @@
-package solutions
+package day01
 
 import (
 	"fmt"
@@ -44,8 +44,8 @@ func partTwo(inp string) int {
 	}
 }
 
-func DayOne() {
-	data, _ := os.ReadFile("inputs/day01.txt")
+func Solve() {
+	data, _ := os.ReadFile("days/day01/input.txt")
 	input := string(data)
 	fmt.Println(partOne(input))
 	fmt.Println(partTwo(input))
