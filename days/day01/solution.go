@@ -22,7 +22,7 @@ func partOne(inp string) int {
 func partTwo(inp string) int {
 	nums := parse(inp)
 	frequency := 0
-	frequencies := sets.New[int]()
+	frequencies := sets.Empty[int]()
 	for {
 		for _, v := range nums {
 			frequency += v
