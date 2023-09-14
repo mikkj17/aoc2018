@@ -2,51 +2,40 @@ package day01
 
 import (
 	"fmt"
-	"os"
-	"strconv"
 	"strings"
+
+	"github.com/mikkj17/aoc2018/utils"
+	"github.com/mikkj17/aoc2018/utils/sets"
 )
 
 func parse(inp string) []int {
-	nums := []int{}
-
-	for _, v := range strings.Split(inp, "\n") {
-		value, _ := strconv.Atoi(v)
-		nums = append(nums, value)
-	}
-
-	return nums
+	return utils.Map(strings.Split(inp, "\n"), func(s string) int {
+		return utils.ToInt(s)
+	})
 }
 
 func partOne(inp string) int {
 	nums := parse(inp)
-	frequency := 0
-	for _, v := range nums {
-		frequency += v
-	}
-
-	return frequency
+	return utils.Sum(nums)
 }
 
 func partTwo(inp string) int {
 	nums := parse(inp)
 	frequency := 0
-	frequencies := map[int]bool{}
+	frequencies := sets.New[int]()
 	for {
 		for _, v := range nums {
 			frequency += v
-
-			if frequencies[frequency] {
+			if sets.Contains(frequencies, frequency) {
 				return frequency
 			}
-			frequencies[frequency] = true
+			sets.Add(frequencies, frequency)
 		}
 	}
 }
 
 func Solve() {
-	data, _ := os.ReadFile("days/day01/input.txt")
-	input := string(data)
+	input := utils.ReadInput(1)
 	fmt.Println(partOne(input))
 	fmt.Println(partTwo(input))
 }

@@ -2,31 +2,13 @@ package day02
 
 import (
 	"fmt"
-	"os"
 	"strings"
+
+	"github.com/mikkj17/aoc2018/utils"
 )
 
 func parse(inp string) []string {
 	return strings.Split(inp, "\n")
-}
-
-func containsValue(frequencies map[rune]int, value int) bool {
-	for _, count := range frequencies {
-		if count == value {
-			return true
-		}
-	}
-
-	return false
-}
-
-func makeFrequencies(line string) map[rune]int {
-	frequencies := map[rune]int{}
-	for _, char := range line {
-		frequencies[char]++
-	}
-
-	return frequencies
 }
 
 func partOne(inp string) int {
@@ -34,13 +16,12 @@ func partOne(inp string) int {
 	counts := map[int]int{2: 0, 3: 0}
 
 	for _, line := range lines {
-		frequencies := makeFrequencies(line)
+		frequencies := utils.Counter([]rune(line))
 
-		if containsValue(frequencies, 2) {
-			counts[2]++
-		}
-		if containsValue(frequencies, 3) {
-			counts[3]++
+		for _, count := range [2]int{2, 3} {
+			if utils.ContainsValue(frequencies, count) {
+				counts[count]++
+			}
 		}
 	}
 
@@ -51,7 +32,7 @@ func getId(first string, second string) string {
 	id := ""
 	for i := 0; i < len(first); i++ {
 		if first[i] == second[i] {
-			id += string(first[i])
+			id += first[i : i+1]
 		}
 	}
 
@@ -73,8 +54,7 @@ func partTwo(inp string) string {
 }
 
 func Solve() {
-	data, _ := os.ReadFile("days/day02/input.txt")
-	input := string(data)
+	input := utils.ReadInput(2)
 	fmt.Println(partOne(input))
 	fmt.Println(partTwo(input))
 }
