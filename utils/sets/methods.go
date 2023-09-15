@@ -1,5 +1,9 @@
 package sets
 
+func Length[T comparable](s Set[T]) int {
+	return len(s.Values)
+}
+
 func Contains[T comparable](s Set[T], e T) bool {
 	_, ok := s.Values[e]
 	return ok

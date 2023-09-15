@@ -16,3 +16,12 @@ func FromSlice[T comparable](vals []T) Set[T] {
 
 	return s
 }
+
+func ToSlice[T comparable](s Set[T]) []T {
+	ret := make([]T, 0, Length(s))
+	for e := range s.Values {
+		ret = append(ret, e)
+	}
+
+	return ret
+}
