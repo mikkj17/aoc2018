@@ -9,9 +9,7 @@ import (
 )
 
 func parse(inp string) []int {
-	return utils.Map(strings.Split(inp, "\n"), func(s string) int {
-		return utils.ToInt(s)
-	})
+	return utils.Map(strings.Split(inp, "\n"), utils.ToInt)
 }
 
 func partOne(inp string) int {

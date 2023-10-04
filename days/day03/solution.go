@@ -13,9 +13,7 @@ func parse(inp string) []Claim {
 	r := regexp.MustCompile(`^#(\d+) @ (\d+),(\d+): (\d+)x(\d+)$`)
 	return utils.Map(strings.Split(inp, "\n"), func(line string) Claim {
 		groups := r.FindStringSubmatch(line)
-		vals := utils.Map(groups[1:], func(s string) int {
-			return utils.ToInt(s)
-		})
+		vals := utils.Map(groups[1:], utils.ToInt)
 		return Claim{
 			id:     vals[0],
 			left:   vals[1],
